@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block name %}Basket{% endblock %}
+
+
+      {% block content %}
+        {% include 'inc/_header.html' %}
+
+<div class="section trending">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="section-heading">
+          <h2>Items {{ cart_list | length }}</h2>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="main-button">
+          <a href="{% url 'shop' %}"> ${{summ}} </a>
+        </div>
+      </div>
+      {% for i in cart_list %}
+        <div class="col-lg-3 col-md-6">
+          <div class="item">
+            <div class="thumb">
+              <a href="{% url 'product_details' i.id %}"><img src="{{ i.prod_item.image.url }}" alt="", height="400px"></a>
+              <span class="price"><em>${{ i.prod_item.old_price }}</em>${{ i.prod_item.new_price }}</span>
+            </div>
+            <div class="down-content">
+              <span class="category">{{ i.prod_item.category }}</span>
+              <h4>{{ i.prod_item.name }}</h4>
+              <br>
+              <form action="{% url 'delete_product' %}" method="post">
+                {% csrf_token %}
+                <button type="submit", name="id", value="{{i.id}}"><i class="fa fa-shopping-bag"></i> DELETE</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>   
+
+{% endblock %}

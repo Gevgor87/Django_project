@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block name %}Shop{% endblock %}
+{% block activ1 %}{% endblock %}
+{% block activ2 %}class="active"{% endblock %}
+{% block activ3 %}{% endblock %}
+
+
+{% block content %}
+{% include 'inc/_header.html' %}
+
+  <div class="section trending">
+    <div class="container">
+      <ul class="trending-filter">
+        {% for i in shop_cat %}
+          <li>
+            <a class="is_active" href="#!" data-filter="*">{{ i.cat }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="row trending-box">
+        {% for i in trending_games %}
+          <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
+            <div class="item">
+              <div class="thumb">
+                <a href="{% url 'product_details' i.id %}"><img src="{{ i.image.url }}" alt="", height="300px"></a>
+                <span class="price"><em>${{ i.old_price }}</em>${{ i.new_price }}</span>
+              </div>
+              <div class="down-content">
+                <span class="category">{{ i.category }}</span>
+                <h4>{{ i.name }}</h4>
+                <a href="{% url 'product_details' i.id %}"><i class="fa fa-shopping-bag"></i></a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="pagination">
+          <li><a href="#"> &lt; </a></li>
+            <li><a href="#">1</a></li>
+            <li><a class="is_active" href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#"> &gt; </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

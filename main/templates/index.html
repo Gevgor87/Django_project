@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block name %}Home{% endblock %}
+
+{% block activ1 %}class="active"{% endblock %}
+{% block activ2 %}{% endblock %}
+{% block activ3 %}{% endblock %}
+
+{% block content %}
+
+
+
+
+  <div class="main-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="caption header-text">
+            <h6>{{home_bginfo.title}}</h6>
+            <h2>{{home_bginfo.title_info}}</h2>
+            <p>{{home_bginfo.info}}</p>
+            <div class="search-input">
+              <form id="search" action="#">
+                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                <button role="button">{{home_bginfo.button_name}}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 offset-lg-2">
+          <div class="right-image">
+            <img src="{{ home_img.img.url }}" alt="">
+            <span class="price">${{ home_img.price }}</span>
+            <span class="offer">-{{ home_img.discount }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="container">
+      <div class="row">
+        {% for i in icon %}
+          <div class="col-lg-3 col-md-6">
+            <a href="#">
+              <div class="item">
+                <div class="image">
+                  <img src="{{ i.icon_png.url }}" alt="" style="max-width: 44px;">
+                </div>
+                <h4>{{ i.title }}</h4>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="section trending">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="section-heading">
+            <h6>{{ title_1.sub }}</h6>
+            <h2>{{ title_1.title }}</h2>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="main-button">
+            <a href="{% url 'shop' %}">View All</a>
+          </div>
+        </div>
+        {% for i in trending_games.game_cat.all %}
+          <div class="col-lg-3 col-md-6">
+            <div class="item">
+              <div class="thumb">
+                <a href="{% url 'product_details' i.id %}"><img src="{{ i.image.url }}" alt="", height="400px"></a>
+                <span class="price"><em>${{ i.old_price }}</em>${{ i.new_price }}</span>
+              </div>
+              <div class="down-content">
+                <span class="category">{{ i.category }}</span>
+                <h4>{{ i.name }}</h4>
+                <a href="{% url 'product_details' i.id %}"><i class="fa fa-shopping-bag"></i></a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="section most-played">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="section-heading">
+            <h6>{{ title_2.sub }}</h6>
+            <h2>{{ title_2.title }}</h2>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="main-button">
+            <a href="{% url 'shop' %}">View All</a>
+          </div>
+        </div>
+        {% for i in most_played.game_cat.all %}
+          <div class="col-lg-2 col-md-6 col-sm-6">
+            <div class="item">
+              <div class="thumb">
+                <a href="{% url 'product_details' i.id %}"><img src="{{ i.image.url }}" alt="", height="300"></a>
+              </div>
+              <div class="down-content">
+                  <span class="category">{{ i.category }}</span>
+                  <h4>{{ i.name }}</h4>
+                  <a href="{% url 'product_details' i.id %}">Explore</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="section categories">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h6>{{ title_3.sub }}</h6>
+            <h2>{{ title_3.title }}</h2>
+          </div>
+        </div>
+        {% for i in category %}
+          <div class="col-lg col-sm-6 col-xs-12">
+            <div class="item">
+              <h4>{{ i.cat_name }}</h4>
+              <div class="thumb">
+                <a href="{% url 'shop' %}"><img src="{{ i.image.url }}" alt=""></a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <div class="section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="shop">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="section-heading">
+                  <h6>{{ food_1.title }}</h6>
+                  <h2>{{ food_1.text_1 }} <em>{{ food_1.text_2 }}</em> {{ food_1.text_3 }}</h2>
+                </div>
+                <p>{{ food_1.p }}</p>
+                <div class="main-button">
+                  <a href="{% url 'shop' %}">{{ food_1.button }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 offset-lg-2 align-self-end">
+          <div class="subscribe">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="section-heading">
+                  <h6>{{ food_2.title }}</h6>
+                  <h2>{{ food_2.text_1 }} <em>{{ food_2.text_2 }}</em> {{ food_2.text_3 }}</h2>
+                </div>
+                <div class="search-input">
+                  <form id="subscribe" action="#">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your email...">
+                    <button type="submit">{{ food_2.button }}</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
